@@ -46,7 +46,18 @@ function verif_key() {
         exit 1
     }
 }
-function verif_key2() {
+function verif_key2 () {
+  permited=$(curl -sSL "https://raw.githubusercontent.com/sys-on/Control/main/Control-IP")
+  [[ $(echo $permited|grep "${IP}") = "" ]] && {
+  echo -e "\n\n\n\033[1;95m======================================================\n ¡ESTA CHAVE NÃO É VÁLIDA COMO A VERSÃO ATUAL!, ENTRE EM CONTATO @SYS-ON\n======================================================\n"
+  [[ -d /etc/newadm ]] && rm -rf /etc/newadm
+  exit 1
+  } || {
+  ### INTALAR VERCION DE SCRIPT
+  v1=$(curl -sSL "https://raw.githubusercontent.com/sys-on/SSHPLUS/main/versao")
+  echo "$v1" > /etc/versin_script
+  }
+#function verif_key2() {
     krm=$(echo '5:q-3gs2.o7%8:1' | rev)
     chmod +x $_Ink/listARM >/dev/null 2>&1
     [[ ! -e "$_Ink/listARM" ]] && {
